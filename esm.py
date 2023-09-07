@@ -1,34 +1,27 @@
-import sys
+def evenly_space_text():
+    # Get user input for the text
+    input_text = input("Enter the text: ")
 
+    # Split the input text into words
+    words = input_text.split()
 
-def even_space_text(input_text):
-    # Calculate the total space based on the length of the input string
-    total_space = len(input_text)
+    # Calculate the total length of all words and spaces
+    total_length = len(input_text)
 
-    # Split the input text into terms
-    terms = input_text.split()
+    # Calculate the desired space between words
+    space_length = total_length // (len(words) - 1)
 
-    # Calculate the space between each term
-    space_between_terms = total_space // (len(terms) - 1)
-
-    # Initialize the result string
+    # Initialize the result
     result = ""
 
-    # Iterate through the terms and add them with spaces
-    for term in terms[:-1]:
-        result += term + " " * space_between_terms
+    # Iterate through words and add spaces
+    for word in words:
+        result += word
+        if word != words[-1]:
+            result += " " * space_length
 
-    # Add the last term without extra space
-    result += terms[-1]
-
-    return result
+    print(result)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python even_space_mcface.py <input_text>")
-        sys.exit(1)
-
-    input_text = sys.argv[1]
-    output_text = even_space_text(input_text)
-    print(output_text)
+    evenly_space_text()
