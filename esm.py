@@ -1,34 +1,41 @@
-def evenly_space_text(text, total_space):
-    # Split the text into individual items
-    items = text.split()
+import sys
 
-    # Calculate the total length of all items combined (sum)
-    total_length = sum(len(item) for item in items)
 
-    # Calculate the number of spaces between items
-    num_spaces = len(items) - 1
+def even_space_text(input_text, total_space):
+    # Split the input text into terms
+    terms = input_text.split()
 
-    # Calculate the space to distribute between items
-    space_between_items = (total_space - total_length) // num_spaces
+    # Calculate the number of terms
+    num_terms = len(terms)
 
-    # Calculate any remaining space that couldn't be evenly distributed
-    remaining_space = (total_space - total_length) % num_spaces
+    # Calculate the remaining space after placing the terms
+    remaining_space = total_space - len(input_text) + num_terms - 1
+
+    # Calculate the equal spacing between terms
+    if num_terms > 1:
+        equal_spacing = remaining_space // (num_terms - 1)
+    else:
+        equal_spacing = 0
 
     # Initialize the result string
-    result = items[0]
+    result = ""
 
-    # Iterate through the items and add spaces between them
-    for i in range(1, len(items)):
-        spaces = " " * space_between_items
-        if i <= remaining_space:
-            spaces += " "
-        result += spaces + items[i]
+    # Add the first term
+    result += terms[0]
+
+    # Add equal spacing and subsequent terms
+    for i in range(1, num_terms):
+        result += " " * equal_spacing + terms[i]
 
     return result
 
 
-# Testing function
-text = "1234 56789 01"
-total_space = 20
-formatted_text = evenly_space_text(text, total_space)
-print(formatted_text)
+if __name__ == "__main__":
+    # Check for the correct number of command-line arguments
+    if len(sys.argv) != 3:
+        print("Usage: python even_space_mcface.py [input_text] [total_space]")
+    else:
+        input_text = sys.argv[1]
+        total_space = int(sys.argv[2])
+        result_text = even_space_text(input_text, total_space)
+        print(result_text)
