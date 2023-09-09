@@ -1,3 +1,6 @@
+import os
+from datetime import datetime
+
 def evenly_space_text():
     # Get user input for the text
     input_text = input("Enter the text: ")
@@ -20,7 +23,17 @@ def evenly_space_text():
         if word != words[-1]:
             result += " " * space_length
 
-    print(result)
+    # Generate a timestamp for the file name
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+    # Create a unique file name with the timestamp
+    file_name = f"esm_{timestamp}.txt"
+
+    # Save the result to a text file
+    with open(file_name, "w") as file:
+        file.write(result)
+
+    print(f"Evenly spaced text saved to {file_name}")
 
 
 if __name__ == "__main__":
