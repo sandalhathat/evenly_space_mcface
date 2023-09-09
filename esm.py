@@ -19,6 +19,9 @@ def evenly_space_text():
     # Initialize the result
     result = ""
 
+    # Calculate the number of space between EACH term
+    space_between_each_term = spaces_between_terms // (len(words) - 1)
+
     # Iterate through words and add spaces
     for i, word in enumerate(words):
         result += word
@@ -32,11 +35,12 @@ def evenly_space_text():
     # Create or append to the "output.txt" file
     with open("output.txt", "a") as file:
         file.write(f"Total spaces in input text: {total_length}\n")
-        file.write(f"Spaces placed between terms: {spaces_between_terms}\n")
+        file.write(f"Spaces placed between terms: {spaces_to_add}\n")
         file.write(f"Evenly spaced text: \"{result}\"\n\n")
 
     print(f"Total spaces in input text: {total_length}")
-    print(f"Spaces placed between terms: {spaces_between_terms}")
+    # print(f"Spaces placed between terms: {spaces_between_terms}")
+    print(f"Spaces placed between each term: {space_between_each_term}")
     print(f"Evenly spaced text saved to output.txt")
 
 
